@@ -13,7 +13,8 @@ import net.gondr.domain.SampleVO;
 @Controller
 public class MainController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String mainPage() {
+	public String mainPage(Model model) {
+		model.addAttribute("msg", "양영디지털고 도제반");
 		return "main";
 	}
 	
