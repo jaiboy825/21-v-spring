@@ -49,15 +49,24 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String loginProcess(UserVO user, HttpSession session) {
+	public String loginProcess(UserVO user, HttpSession session, Model model) {
 		if (user.getUserid().equals("gondr") && user.getPassword().equals("1234")) {
+			session.removeAttribute("cant");
 			// 로그인 성공한거
 			session.setAttribute("user", user);
 			return "redirect:/"; // 메인페이지로 이동
 		} else {
+			session.setAttribute("cant", "아이디 또는 비밀번호가 틀렸습니다.");
 			return "redirect:/user/login";
 		}
 	}
+	
+	@RequestMapping(value = "logout")
+	public String logoutProcess(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/";
+	}
+	
 }
 // 주소는 user/regist2 이고
 // 접근시  아이디, 비번, 비번확인, 이름, 이메일을 입력하는 폼이 나오고
