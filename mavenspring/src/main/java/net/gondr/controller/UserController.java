@@ -2,17 +2,59 @@ package net.gondr.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import net.gondr.dao.UserDAO;
 import net.gondr.domain.SampleVO;
+import net.gondr.domain.UserVO;
 import net.gondr.domain.YYSampleVO;
 
 @Controller
 @RequestMapping("/user/")
 public class UserController {
+	@Autowired
+	private UserDAO dao;
+
+	@RequestMapping(value = "register", method = RequestMethod.GET)
+	public String viewRegist3Page() {
+		// /user/regist
+		return "user/register";
+	}
+
+	@RequestMapping(value = "register", method = RequestMethod.POST)
+	public String regist3Process(UserVO user, HttpSession session) {
+		UserVO temp = dao.selectUser(user.getUserid());
+
+		if (user.getUserid().equals("") || user.getPassword().equals("") || user.getPasswordc().equals("")
+				|| user.getUsername().equals("")) {
+			session.setAttribute("msg", "공백");
+			return "redirect:/user/register";
+		} else if (!user.getPassword().equals(user.getPasswordc())) {
+			session.setAttribute("msg", "비밀번호가 서로 다릅니다");
+			return "redirect:/user/register";
+
+		} else if (temp != null) {
+			session.setAttribute("msg", "이미 가입된 아이디 입니다");
+			return "redirect:/user/register";
+		}
+		dao.insertUser(user);
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/data/{userid}")
+	public @ResponseBody UserVO data(@PathVariable String userid) {
+		UserVO temp = dao.selectUser(userid);
+		if (temp == null) {
+			return null;
+		}
+		return temp;
+	}
 
 	@RequestMapping(value = "regist", method = RequestMethod.GET)
 	public String viewRegistPage() {
@@ -50,7 +92,8 @@ public class UserController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginProcess(UserVO user, HttpSession session, Model model) {
-		if (user.getUserid().equals("gondr") && user.getPassword().equals("1234")) {
+		UserVO u = dao.selectUser(user.getUserid());
+		if (u != null && u.getPassword().equals(user.getPassword())) {
 			session.removeAttribute("cant");
 			// 로그인 성공한거
 			session.setAttribute("user", user);
@@ -70,6 +113,15 @@ public class UserController {
 	@RequestMapping(value = "info", method = RequestMethod.GET)
 	public String viewInfoPage(HttpSession session) {
 		return "user/info";
+	}
+
+	@RequestMapping(value = "data", method = RequestMethod.GET)
+	public @ResponseBody UserVO getUserData() {
+		UserVO temp = new UserVO();
+		temp.setUserid("gondr");
+		temp.setPassword("1234");
+		temp.setUsername("최선한");
+		return temp;
 	}
 }
 // 주소는 user/regist2 이고

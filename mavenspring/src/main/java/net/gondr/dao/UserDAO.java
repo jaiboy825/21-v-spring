@@ -1,7 +1,9 @@
 package net.gondr.dao;
 
-import net.gondr.controller.UserVO;
+import net.gondr.domain.UserVO;
 
 public interface UserDAO {
 	public void insertUser(UserVO user);
+	
+	public UserVO selectUser(String userid);
 }

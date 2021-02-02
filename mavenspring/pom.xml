@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.gondr</groupId>
 	<artifactId>mavenSpring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<dependencies>
-	
+
 		<!-- 서블릿 규약 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -16,7 +17,7 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- jsp 2.3 -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -24,28 +25,28 @@
 			<version>2.3.2-b02</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- springframework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>5.1.2.RELEASE</version>
 		</dependency>
-		
+
 		<!-- 스프링에서 jdbc를 쓰기 위해 필요한 것 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.1.2.RELEASE</version>
 		</dependency>
-		<!-- mysql 연결 관련  -->
+		<!-- mysql 연결 관련 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -70,15 +71,22 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>5.1.2.RELEASE</version>
 		</dependency>
+
+		<!-- json 컨버터 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.7</version>
+		</dependency>
 	</dependencies>
-	
-	<!-- 빌드시 필요한 메이븐  플러그인-->
+
+	<!-- 빌드시 필요한 메이븐 플러그인 -->
 	<build>
 		<plugins>
 			<plugin>
@@ -92,5 +100,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
