@@ -12,7 +12,7 @@
 	<p>${msg}</p>
 	
 	<c:if test="${! empty user}">
-		<p>${user.userid}님환영합니다.</p>
+		<p>${user.userid}님 환영합니다.</p>
 		<span><a href="/user/logout">[로그아웃]</a></span>
 	</c:if>
 

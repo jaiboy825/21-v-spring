@@ -60,13 +60,17 @@ public class UserController {
 			return "redirect:/user/login";
 		}
 	}
-	
-	@RequestMapping(value = "logout")
+
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logoutProcess(HttpSession session) {
 		session.removeAttribute("user");
 		return "redirect:/";
 	}
-	
+
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+	public String viewInfoPage(HttpSession session) {
+		return "user/info";
+	}
 }
 // 주소는 user/regist2 이고
 // 접근시  아이디, 비번, 비번확인, 이름, 이메일을 입력하는 폼이 나오고
