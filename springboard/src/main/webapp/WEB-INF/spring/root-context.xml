@@ -26,4 +26,6 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
+	<context:component-scan base-package="net.gondr.dao"/>
+	<context:component-scan base-package="net.gondr.service"/>
 </beans>
