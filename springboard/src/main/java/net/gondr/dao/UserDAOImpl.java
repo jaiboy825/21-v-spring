@@ -33,5 +33,24 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void insertUser(UserVO user) {
 		session.insert(ns + ".insertUser", user);
-	}	
+	}
+
+	@Override
+	public void expUp(String userid) {
+		session.update(ns + ".expUp", userid);
+		
+	}
+
+	@Override
+	public int expCheck(int level) {
+		return session.selectOne(ns + ".selectExp", level);
+		
+	}
+
+	@Override
+	public void updateUser(String userid) {
+		session.update(ns + ".updateUser", userid);
+		
+	}
+
 }

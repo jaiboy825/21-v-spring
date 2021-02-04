@@ -17,4 +17,13 @@
 		SELECT * FROM spring_users 
 		WHERE userid = #{userid} AND password = PASSWORD(#{password})
 	</select>
+	<update id="expUp">
+		UPDATE spring_users SET exp = exp + 5 WHERE userid = #{userid}
+	</update>
+	<select id="selectExp" resultType="int">
+		SELECT exp FROM spring_exp where level = #{level}
+	</select>
+	<update id="updateUser">
+		UPDATE spring_users SET exp = 0, level = level + 1 WHERE userid = #{userid}
+	</update>
 </mapper>
