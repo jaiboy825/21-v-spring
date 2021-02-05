@@ -56,7 +56,7 @@
 			<beans:ref bean="nonAuthInter"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/user/logout"/>
+			<mapping path="/board/write"/>
 			<beans:ref bean="authInter"/>
 		</interceptor>
 	</interceptors>
