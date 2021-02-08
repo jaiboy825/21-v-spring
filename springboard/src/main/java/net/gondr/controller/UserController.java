@@ -1,14 +1,22 @@
 package net.gondr.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import net.gondr.domain.LoginDTO;
@@ -93,5 +101,26 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("user");
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="profile/{file:.+}", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] getUserProfile(@PathVariable String file) throws IOException{
+		String uploadPath = context.getRealPath("/WEB-INF/upload");
+		
+		String defaultImage = "nouser.jpg";
+		
+		try {
+			File profile = new File(uploadPath + File.separator + file);
+			FileInputStream fis = new FileInputStream(profile);
+			return IOUtils.toByteArray(fis);
+			
+		} catch (FileNotFoundException e) {
+			File profile = new File(uploadPath + File.separator + defaultImage);
+			FileInputStream fis = new FileInputStream(profile);
+			return IOUtils.toByteArray(fis);
+		}
+		
+		
 	}
 }

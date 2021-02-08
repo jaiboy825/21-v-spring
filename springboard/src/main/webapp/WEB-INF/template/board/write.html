@@ -9,8 +9,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-10 offset-1">
-				<h2>글작성</h2>
+				<h2 th:if="${boardVO.id == null}">글작성</h2>
+				<h2 th:if="${boardVO.id != null}">글수정</h2>
 				<form method="post" th:action="@{/board/write}" enctype="multipart/form-data" th:object="${boardVO}">
+					<input type="hidden" th:field="*{id}">
 					<div class="form-group">
 						<label for="title">글 제목</label> 
 						<input type="text" class="form-control" th:errorclass="is-invalid" id="title" placeholder="글 제목을 입력하세요" th:field="*{title}">
@@ -26,7 +28,8 @@
 						</div>
 					</div>
 					
-					<button type="submit" class="btn btn-primary">글작성</button>
+					<button th:if="${boardVO.id == null}" type="submit" class="btn btn-primary">글작성</button>
+					<button th:if="${boardVO.id != null}" type="submit" class="btn btn-primary">글수정</button>
 				</form>
 			</div>
 		</div>

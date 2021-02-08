@@ -3,6 +3,7 @@ package net.gondr.dao;
 import java.util.List;
 
 import net.gondr.domain.BoardVO;
+import net.gondr.domain.Criteria;
 
 public interface BoardDAO {
 	public void write(BoardVO data);
@@ -16,4 +17,8 @@ public interface BoardDAO {
 	public void update(BoardVO data);
 	
 	public Integer getCnt();
+
+	public List<BoardVO> list(Criteria c);
+
+	public Integer getCnt(Criteria c);
 }
