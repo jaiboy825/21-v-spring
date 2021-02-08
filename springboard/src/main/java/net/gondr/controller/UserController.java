@@ -55,12 +55,14 @@ public class UserController {
 		MultipartFile file = registerDTO.getProfileImg();
 		// 업로드한 파일이 존재하면
 		String upFile = "";
+		UserVO user = new UserVO();
 		if (!file.getOriginalFilename().equals("")) {
 			upFile = FileUtil.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+			user.setImg(upFile);
+		}else {
+			user.setImg("/WEB-INF/upload/nouser.jpg");
 		}
 
-		UserVO user = new UserVO();
-		user.setImg(upFile);
 		user.setName(registerDTO.getUsername());
 		user.setPassword(registerDTO.getPassword());
 		user.setUserid(registerDTO.getUserid());
