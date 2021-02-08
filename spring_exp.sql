@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- 생성 시간: 21-02-05 12:56
+-- 생성 시간: 21-02-08 14:29
 -- 서버 버전: 10.1.47-MariaDB-0ubuntu0.18.04.1
 -- PHP 버전: 7.2.24-0ubuntu0.18.04.7
 
